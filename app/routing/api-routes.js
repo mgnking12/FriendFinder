@@ -1,31 +1,27 @@
-var dataFriends = require('../data/friends.js');
+var friendsData = require("../data/friends.js");
+var path = require("path");
+var bodyParser = require("body-parser");
 
-//Exports to the express app
 module.exports = function(app) {
     app.get('/api/friends', function(req, res) {
-        res.json(dataFriends);
+        res.json(friendsData);
+    })
 
-        // for (var i = 0; i < friends.length; i++) {
-        //     res.json(friends[i]);
-        //     return;
-        // }
-
-        // res.json(false);
-
-    });
-
-    // Create New Friend - takes in JSON input
     app.post('/api/friends', function(req, res) {
-
-        // req.body hosts is equal to the JSON post sent from the user
-        var newfriend = req.body;
-        newFriend.friendID = newFriend.friendName.replace(/\s+/g, '').toLowerCase();
-        // We then add the json the user sent to the character array
-        friendArr.push(newfriend);
-
-        // We then display the JSON to the users
-        res.json(newfriend);
-        // res.json(friendArr);
-    });
-
+        var addFriend = req.body;
+        var difference = 50;
+        var friendMatch;
+        friendsData.forEach(function(apiFriends) {
+            var diff = 0;
+            for (var i = 0; i < apiFriends.scores.length; i++) {
+                diff += Math.abs(apiFriends.scores[i] - addFriend.scores[i]);
+            }
+            if (diff <= difference) {
+                difference = diff;
+                friendMatch = apiFriends;
+            }
+        })
+        res.json(friendMatch);
+        friendsData.push(addFriend);
+    })
 }
