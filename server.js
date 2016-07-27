@@ -6,7 +6,8 @@ var path = require('path');
 // EXPRESS CONFIGURATION
 var app = express();
 var PORT = 3000;
-
+app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(__dirname + '/public'));
 // BodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -20,6 +21,7 @@ app.use(bodyParser.json({
 // ROUTER
 require('./app/routing/api-routes.js')(app);
 require('./app/routing/html-routes.js')(app);
+
 
 // LISTENER
 app.listen(process.env.PORT || 3000, function() {
