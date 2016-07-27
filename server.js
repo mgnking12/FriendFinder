@@ -6,7 +6,6 @@ var path = require('path');
 // EXPRESS CONFIGURATION
 var app = express();
 var PORT = 3000;
-app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(__dirname + '/public'));
 // BodyParser
 app.use(bodyParser.json());
@@ -17,6 +16,8 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({
     type: 'application/vnd.api+json'
 }));
+
+app.use(express.static('app'));
 
 // ROUTER
 require('./app/routing/api-routes.js')(app);

@@ -1,0 +1,13 @@
+img {
+    width: 200px;
+}
+
+body {
+    min-height: 100%;
+    background-color: #2C3E50 !important;
+    text-align: center;
+}
+
+.jumbotron {
+    background-color: #ECF0F1 !important;
+}
